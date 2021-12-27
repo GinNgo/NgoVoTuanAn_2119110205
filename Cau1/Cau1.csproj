@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmloyeeDTO\DBConnection.cs" />
+    <Compile Include="EmloyeeDTO\DepartmentDTO.cs" />
     <Compile Include="EmloyeeDTO\EmloyeeDTO.cs" />
     <Compile Include="EmloyeeGUI\EmloyeeGUI.cs">
       <SubType>Form</SubType>
