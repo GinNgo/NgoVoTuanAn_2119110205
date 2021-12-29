@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cau1.EmloyeeDTO
+namespace Cau1.DepartmentDTO
 {
-    public class DepartmentDTO
+    public class DepartmentBEL
     {
        public string IdDepartment { get; set; }
         public string Name { get; set; }

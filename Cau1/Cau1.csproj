@@ -46,18 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmloyeeDTO\DBConnection.cs" />
-    <Compile Include="EmloyeeDTO\DepartmentDTO.cs" />
-    <Compile Include="EmloyeeDTO\EmloyeeDTO.cs" />
-    <Compile Include="EmloyeeGUI\EmloyeeGUI.cs">
+    <Compile Include="EmployeeBAL\DepartmentBUS.cs" />
+    <Compile Include="EmployeeBAL\EmployeeBUS.cs" />
+    <Compile Include="EmployeeDAL\DepartmentDAL.cs" />
+    <Compile Include="EmployeeDAL\EmployeeDAL.cs" />
+    <Compile Include="EmployeeDTO\DBConnection.cs" />
+    <Compile Include="EmployeeDTO\DepartmentBEL.cs" />
+    <Compile Include="EmployeeDTO\EmployeeBEL.cs" />
+    <Compile Include="EmployeeGUI\EmloyeeGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmloyeeGUI\EmloyeeGUI.Designer.cs">
+    <Compile Include="EmployeeGUI\EmloyeeGUI.Designer.cs">
       <DependentUpon>EmloyeeGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EmloyeeGUI\EmloyeeGUI.resx">
+    <EmbeddedResource Include="EmployeeGUI\EmloyeeGUI.resx">
       <DependentUpon>EmloyeeGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -82,9 +86,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EmloyeeBAL\" />
-    <Folder Include="EmloyeeDAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

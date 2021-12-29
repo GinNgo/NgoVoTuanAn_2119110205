@@ -30,7 +30,7 @@ namespace Cau1
         private void InitializeComponent()
         {
             this.txtDate = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.txtLocation = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbox = new System.Windows.Forms.CheckBox();
@@ -43,15 +43,15 @@ namespace Cau1
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.tbDonVi = new System.Windows.Forms.Label();
+            this.cbDV = new System.Windows.Forms.ComboBox();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tbDonVi = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).BeginInit();
             this.SuspendLayout();
             // 
             // txtDate
@@ -64,21 +64,25 @@ namespace Cau1
             this.txtDate.TabIndex = 33;
             this.txtDate.Value = new System.DateTime(2021, 12, 27, 0, 0, 0, 0);
             // 
-            // dataGridView1
+            // dgv_Employee
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_Employee.AllowUserToAddRows = false;
+            this.dgv_Employee.AllowUserToDeleteRows = false;
+            this.dgv_Employee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Employee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dataGridView1.Location = new System.Drawing.Point(14, 64);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(629, 198);
-            this.dataGridView1.TabIndex = 28;
+            this.dgv_Employee.Location = new System.Drawing.Point(14, 64);
+            this.dgv_Employee.Name = "dgv_Employee";
+            this.dgv_Employee.ReadOnly = true;
+            this.dgv_Employee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Employee.Size = new System.Drawing.Size(629, 198);
+            this.dgv_Employee.TabIndex = 28;
+            this.dgv_Employee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_RowEnter);
             // 
             // txtLocation
             // 
@@ -156,6 +160,7 @@ namespace Cau1
             this.button1.TabIndex = 29;
             this.button1.Text = "Thoát";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Exit_Click);
             // 
             // button2
             // 
@@ -165,6 +170,7 @@ namespace Cau1
             this.button2.TabIndex = 30;
             this.button2.Text = "Sửa";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btEdit_Click);
             // 
             // button3
             // 
@@ -174,6 +180,7 @@ namespace Cau1
             this.button3.TabIndex = 31;
             this.button3.Text = "Xóa";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.btDelete_Click);
             // 
             // button4
             // 
@@ -183,6 +190,24 @@ namespace Cau1
             this.button4.TabIndex = 32;
             this.button4.Text = "Thêm";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.btNew_Click);
+            // 
+            // tbDonVi
+            // 
+            this.tbDonVi.AutoSize = true;
+            this.tbDonVi.Location = new System.Drawing.Point(11, 41);
+            this.tbDonVi.Name = "tbDonVi";
+            this.tbDonVi.Size = new System.Drawing.Size(38, 13);
+            this.tbDonVi.TabIndex = 34;
+            this.tbDonVi.Text = "Đơn vị";
+            // 
+            // cbDV
+            // 
+            this.cbDV.FormattingEnabled = true;
+            this.cbDV.Location = new System.Drawing.Point(64, 36);
+            this.cbDV.Name = "cbDV";
+            this.cbDV.Size = new System.Drawing.Size(123, 21);
+            this.cbDV.TabIndex = 35;
             // 
             // Column1
             // 
@@ -210,6 +235,9 @@ namespace Cau1
             this.Column4.DataPropertyName = "GioiTinh";
             this.Column4.HeaderText = "Giới tính";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Column4.Width = 70;
             // 
             // Column5
@@ -226,36 +254,19 @@ namespace Cau1
             this.Column6.HeaderText = "Đơn vị";
             this.Column6.Name = "Column6";
             // 
-            // tbDonVi
-            // 
-            this.tbDonVi.AutoSize = true;
-            this.tbDonVi.Location = new System.Drawing.Point(11, 41);
-            this.tbDonVi.Name = "tbDonVi";
-            this.tbDonVi.Size = new System.Drawing.Size(38, 13);
-            this.tbDonVi.TabIndex = 34;
-            this.tbDonVi.Text = "Đơn vị";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(64, 36);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(123, 21);
-            this.comboBox1.TabIndex = 35;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 311);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbDV);
             this.Controls.Add(this.tbDonVi);
             this.Controls.Add(this.txtDate);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_Employee);
             this.Controls.Add(this.txtLocation);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbox);
@@ -266,7 +277,8 @@ namespace Cau1
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,7 +286,7 @@ namespace Cau1
 
         #endregion
         private System.Windows.Forms.DateTimePicker txtDate;
-        public System.Windows.Forms.DataGridView dataGridView1;
+        public System.Windows.Forms.DataGridView dgv_Employee;
         private System.Windows.Forms.TextBox txtLocation;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbox;
@@ -283,18 +295,18 @@ namespace Cau1
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMa;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label tbDonVi;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbDV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
 
